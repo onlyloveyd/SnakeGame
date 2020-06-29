@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 public class MyActivity extends Activity {
@@ -33,17 +31,18 @@ public class MyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSnakeView = new SnakeView(this);
-        setContentView(mSnakeView);
+
+        setContentView(R.layout.main);
+        mSnakeView = (SnakeView) findViewById(R.id.snake_view);
         isPaused = false;
 
-        mRefreshThread = new Thread("TimerThread"){
+        mRefreshThread = new Thread("TimerThread") {
 
             @Override
             public void run() {
                 // TODO Auto-generated method stub
                 super.run();
-                while(!isPaused) {
+                while (!isPaused) {
                     Message msg = mHandler.obtainMessage();
                     msg.arg1 = REFRESH;
                     mHandler.sendMessage(msg);
